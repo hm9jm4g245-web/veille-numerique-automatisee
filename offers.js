@@ -38,6 +38,23 @@ function extractPrice(line) {
   const match = line.match(/(\d+(?:[.,]\d+)?)\s*€/);
   return match ? `${match[1].replace('.', ',')} €` : null;
 }
+function extractProductImage(lines, index) {
+  // Les lecteurs de pages renvoient parfois les images sur une ligne voisine du titre ou du prix.
+  const offsets = [0, -1, 1, -2, 2, -3, 3];
+  for (const offset of offsets) {
+    const line = lines[index + offset];
+    if (!line) continue;
+    const match = line.match(/!\[[^\]]*\]\((https?:\/\/[^\s)]+)(?:\s+[^)]*)?\)/i);
+    if (!match) continue;
+    try {
+      const imageUrl = new URL(match[1]);
+      if (imageUrl.protocol === 'https:' || imageUrl.protocol === 'http:') return imageUrl.href;
+    } catch (_) {
+      // Ignore les URLs d’image invalides et utilise l’illustration de remplacement.
+    }
+  }
+  return '';
+}
 function parseOffers(markdown, storeKey, source) {
   const lines = markdown.split('\n');
   const offers = [];
@@ -66,7 +83,10 @@ function parseOffers(markdown, storeKey, source) {
     if (markdownLink?.[2]) {
       try { url = new URL(markdownLink[2], source.url).href; } catch (_) {}
     }
-    offers.push({ title: title.slice(0, 110), price, store: storeKey, storeName: source.name, source: source.label, url, icon: iconFor(title) });
+    offers.push({
+      title: title.slice(0, 110), price, store: storeKey, storeName: source.name,
+      source: source.label, url, image: extractProductImage(lines, i), icon: iconFor(title),
+    });
     if (offers.length >= 18) break;
   }
   return offers;
@@ -98,7 +118,6 @@ async function refreshOffers() {
   loading.classList.remove('hidden');
   grid.replaceChildren();
   setStatus('Actualisation des boutiques et de Dealabs…', 'loading');
-
   const results = await Promise.allSettled([
     fetchStoreOffers('darty'), fetchStoreOffers('electro'),
     fetchDealabs('darty', 'Darty'), fetchDealabs('electro', 'Electro Dépôt'),
@@ -114,10 +133,8 @@ async function refreshOffers() {
   loading.classList.add('hidden');
   refreshButton.disabled = false;
   render();
-
   if (unique.length) {
-    const successCount = successful.length;
-    setStatus(`${unique.length} offre(s) repérée(s) · ${successCount}/4 sources consultées · ${new Intl.DateTimeFormat('fr-FR', { timeStyle: 'short' }).format(new Date())}`);
+    setStatus(`${unique.length} offre(s) repérée(s) · ${successful.length}/4 sources consultées · ${new Intl.DateTimeFormat('fr-FR', { timeStyle: 'short' }).format(new Date())}`);
   } else if (allOffers.length) {
     const savedAt = localStorage.getItem('offers-cache-v2-time');
     const savedDate = savedAt ? new Intl.DateTimeFormat('fr-FR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(savedAt)) : 'date inconnue';
@@ -139,11 +156,21 @@ function render() {
   grid.innerHTML = filtered.map((offer) => `
     <article class="offer-card">
       <div class="offer-head"><span class="store-badge ${offer.source === 'Dealabs' ? 'dealabs' : offer.store}">${escapeHtml(offer.storeName)}</span><time>${escapeHtml(offer.source)}</time></div>
-      <div class="offer-icon" aria-hidden="true">${offer.icon}</div>
+      <div class="offer-icon" aria-label="Photo du produit">
+        ${offer.image ? `<img data-product-image src="${escapeAttribute(offer.image)}" alt="${escapeAttribute(offer.title)}" loading="lazy" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:contain;padding:7px">` : ''}
+        <span data-image-fallback ${offer.image ? 'hidden' : ''}>${escapeHtml(offer.icon)}</span>
+      </div>
       <h2>${escapeHtml(offer.title)}</h2>
-      <p>Prix repéré dans le contenu public de la source. Vérifiez le prix et la disponibilité sur la page liée.</p>
+      <p>Prix repéré sur ${escapeHtml(offer.source)}. Vérifiez le prix et la disponibilité sur la page liée.</p>
       <div class="offer-footer"><div class="offer-price">${escapeHtml(offer.price)}<small>prix à vérifier</small></div><a class="offer-link" href="${escapeAttribute(offer.url)}" target="_blank" rel="noopener noreferrer" aria-label="Vérifier l’offre">↗</a></div>
     </article>`).join('');
+  grid.querySelectorAll('[data-product-image]').forEach((image) => {
+    image.addEventListener('error', () => {
+      image.hidden = true;
+      const fallback = image.parentElement.querySelector('[data-image-fallback]');
+      if (fallback) fallback.hidden = false;
+    }, { once: true });
+  });
 }
 function escapeHtml(value) {
   const div = document.createElement('div');
