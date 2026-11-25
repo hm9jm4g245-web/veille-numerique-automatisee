@@ -1,18 +1,22 @@
 # Veille Black Friday — Darty & Électro Dépôt
 
-Page statique HTML/CSS/JavaScript remplaçant l’ancienne démonstration de casino sur la branche `feature/veille-black-friday`.
+Page statique HTML/CSS/JavaScript disponible sur la branche `feature/veille-black-friday`.
 
-## Mise à jour
+## Sources intégrées
 
-À chaque chargement de la page, `offers.js` tente d’interroger les pages officielles Black Friday :
+À chaque ouverture, la page tente de lire les pages publiques de Darty, Électro Dépôt et les recherches Dealabs suivantes :
 
 - https://www.darty.com/black-friday
 - https://www.electrodepot.fr/black-friday
+- https://www.dealabs.com/search?q=Darty
+- https://www.dealabs.com/search?q=Electro%20D%C3%A9p%C3%B4t
 
-Les offres sont stock��es en cache dans le navigateur uniquement pour les afficher si une boutique devient temporairement indisponible.
+Les résultats lisibles sont affichés avec leur source et un lien de vérification. La page inclut aussi des liens de recherche manuelle Dealabs et idealo. idealo sert ici de comparateur à ouvrir pour rechercher le modèle exact ; il ne fournit pas de flux public grand public exploitable directement par cette page.
 
-## Limite technique
+Les dernières offres récupérées sont conservées dans le stockage local du navigateur pour servir de solution de secours.
 
-Les boutiques peuvent afficher des données dynamiques, utiliser des protections anti-robot ou modifier leur structure HTML. Une page GitHub Pages entièrement statique ne dispose pas de serveur pour contourner durablement ces restrictions. Si une boutique bloque l’accès automatique, la page affiche les liens officiels et conserve les dernières données disponibles dans le cache navigateur.
+## Limites techniques
 
-Pour une mise à jour métier encore plus fiable, le projet peut être complété par un petit processus automatisé quotidien qui récupère les données côté serveur et met à jour un fichier JSON.
+La page utilise le lecteur public r.jina.ai pour tenter d’obtenir le texte des pages, mais ce service tiers peut être limité ou indisponible. Les sites peuvent modifier leur présentation, bloquer les robots ou faire varier les prix. Le site étant statique, il ne peut pas garantir la collecte à chaque visite. Vérifiez toujours le prix et la disponibilité sur la boutique avant achat.
+
+Pour une veille robuste, il faudrait ensuite déplacer la collecte vers une tâche planifiée côté serveur, utiliser une API autorisée et publier un fichier JSON actualisé.

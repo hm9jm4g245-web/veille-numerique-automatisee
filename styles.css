@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap');
-
 :root { color-scheme: light; --ink: #111827; --muted: #667085; --line: #e8eaf0; --blue: #3158d9; --cyan: #eaf5ff; --red: #df3e4b; }
 * { box-sizing: border-box; }
 body { margin: 0; min-height: 100vh; background: #f6f7fb; color: var(--ink); font-family: 'DM Sans', sans-serif; }
@@ -9,6 +8,7 @@ button, input { font: inherit; }
 .brand > span:last-child span { color: var(--blue); }
 .brand-icon { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 10px; color: #fff; background: linear-gradient(135deg, #3158d9, #7b63df); font-size: 20px; }
 .refresh-button { height: 42px; padding: 0 15px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--ink); font-weight: 700; cursor: pointer; }
+.refresh-button:disabled { opacity: .55; cursor: wait; }
 main { width: min(calc(100% - 32px), 1120px); margin: 0 auto; }
 .hero { padding: 47px 0 28px; }
 .eyebrow { color: var(--blue); margin: 0 0 11px; font-size: 11px; font-weight: 800; letter-spacing: 1.8px; }
@@ -29,13 +29,13 @@ h1 span { color: var(--blue); }
 .search-wrap span { color: #9aa0af; }
 .search-wrap input { width: 100%; border: 0; outline: 0; padding: 0 8px; background: transparent; }
 .offers-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
-.offer-card { min-width: 0; display: flex; flex-direction: column; min-height: 270px; padding: 16px; border: 1px solid var(--line); border-radius: 13px; background: #fff; box-shadow: 0 5px 18px #1d26360a; }
+.offer-card { min-width: 0; display: flex; flex-direction: column; min-height: 270px; padding: 16px; border: 1px solid var(--line); border-radius: 13px; background: #fff; box-shadow: 0 5px 18px #1d26360a; transition: .18s ease; }
 .offer-card:hover { border-color: #ccd3e5; transform: translateY(-2px); box-shadow: 0 9px 22px #1d263612; }
-.offer-card { transition: .18s ease; }
-.offer-head { display: flex; justify-content: space-between; align-items: center; }
-.store-badge { display: inline-flex; align-items: center; min-height: 24px; padding: 0 8px; border-radius: 6px; background: #eef2ff; color: #3158d9; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+.offer-head { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+.store-badge { display: inline-flex; align-items: center; min-height: 24px; padding: 0 8px; border-radius: 6px; background: #eef2ff; color: #3158d9; font-size: 10px; font-weight: 800; }
 .store-badge.electro { background: #fff0ef; color: #ca3f38; }
-.offer-card time { color: #98a0af; font-size: 10px; }
+.store-badge.dealabs { background: #fff2eb; color: #e65320; }
+.offer-card time { color: #98a0af; font-size: 10px; white-space: nowrap; }
 .offer-icon { height: 78px; display: grid; place-items: center; margin: 11px 0 8px; border-radius: 9px; background: linear-gradient(145deg, #f4f6fb, #e9edf6); font-size: 38px; }
 .offer-card h2 { margin: 0 0 8px; font: 700 15px/1.35 'Space Grotesk', sans-serif; }
 .offer-card p { margin: 0 0 12px; color: var(--muted); font-size: 12px; line-height: 1.45; }
@@ -43,20 +43,35 @@ h1 span { color: var(--blue); }
 .offer-price { color: var(--red); font: 700 22px 'Space Grotesk', sans-serif; }
 .offer-price small { display: block; color: #98a0af; font: 500 9px 'DM Sans', sans-serif; }
 .offer-link { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; }
-.empty-state { grid-column: 1/-1; padding: 60px 20px; border: 1px dashed #ccd2df; border-radius: 12px; text-align: center; color: var(--muted); }
+.empty-state { grid-column: 1/-1; padding: 45px 20px; border: 1px dashed #ccd2df; border-radius: 12px; text-align: center; color: var(--muted); line-height: 1.6; }
 .loading-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
 .loading-grid article { height: 270px; border-radius: 13px; background: linear-gradient(100deg, #eceef4 20%, #f7f8fb 40%, #eceef4 60%) 0 0/200% 100%; animation: loading 1.2s infinite linear; }
 .loading-grid.hidden { display: none; }
-.official-links { margin: 24px 0 36px; padding: 19px; border: 1px solid var(--line); border-radius: 13px; background: #fff; }
-.official-links h2 { margin: 0 0 12px; font: 700 16px 'Space Grotesk', sans-serif; }
+.source-panel, .official-links { margin: 24px 0 0; padding: 20px; border: 1px solid var(--line); border-radius: 13px; background: #fff; }
+.source-heading { display: flex; align-items: end; justify-content: space-between; gap: 22px; margin-bottom: 15px; }
+.source-heading .eyebrow { margin-bottom: 5px; }
+.source-heading h2, .official-links h2 { margin: 0; font: 700 18px 'Space Grotesk', sans-serif; }
+.source-heading > p { max-width: 430px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.source-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.source-links a { min-width: 0; display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 9px; color: var(--ink); text-decoration: none; }
+.source-links a:hover, .official-links a:hover { border-color: #bac4d9; }
+.source-links a > span:nth-child(2) { min-width: 0; flex: 1; }
+.source-links b, .source-links small { display: block; }
+.source-links b { font-size: 12px; }
+.source-links small { margin-top: 3px; color: var(--muted); font-size: 10px; }
+.source-links i { color: var(--blue); font-style: normal; }
+.source-logo { width: 30px; height: 30px; flex: 0 0 30px; display: grid; place-items: center; border-radius: 8px; color: #fff; font: 700 16px 'Space Grotesk', sans-serif; }
+.dealabs-logo { background: #e65320; }
+.idealo-logo { background: #ef7c00; }
+.official-links { margin-bottom: 36px; }
+.official-links h2 { margin-bottom: 12px; }
 .official-links > div { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .official-links a { display: flex; justify-content: space-between; align-items: center; padding: 13px 14px; border: 1px solid var(--line); border-radius: 9px; color: var(--ink); text-decoration: none; }
-.official-links a:hover { border-color: #bac4d9; }
 .official-links a span { font-weight: 800; }
 .official-links a b { color: var(--blue); }
 .official-links small { color: var(--muted); }
 footer { padding: 20px; border-top: 1px solid var(--line); background: #fff; color: #9097a5; text-align: center; font-size: 11px; }
 @keyframes loading { to { background-position: -200% 0; } }
 @keyframes pulse { to { opacity: .35; } }
-@media (max-width: 900px) { .offers-grid, .loading-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 580px) { .topbar { height: 64px; } .refresh-button span { display: none; } main { width: min(calc(100% - 22px), 1120px); } .hero { padding-top: 35px; } h1 { letter-spacing: -1.5px; } .notice { flex-direction: column; } .toolbar { align-items: stretch; flex-direction: column; } .store-tabs { display: grid; grid-template-columns: repeat(3, 1fr); } .tab { padding: 0 7px; font-size: 12px; } .search-wrap { width: 100%; } .offers-grid, .loading-grid { grid-template-columns: 1fr; } .official-links > div { grid-template-columns: 1fr; } .official-links a { align-items: flex-start; flex-direction: column; gap: 4px; } }
+@media (max-width: 900px) { .offers-grid, .loading-grid { grid-template-columns: repeat(2, 1fr); } .source-links { grid-template-columns: 1fr; } }
+@media (max-width: 580px) { .topbar { height: 64px; } .refresh-button span { display: none; } main { width: min(calc(100% - 22px), 1120px); } .hero { padding-top: 35px; } h1 { letter-spacing: -1.5px; } .notice { flex-direction: column; } .toolbar { align-items: stretch; flex-direction: column; } .store-tabs { display: grid; grid-template-columns: repeat(3, 1fr); } .tab { padding: 0 7px; font-size: 12px; } .search-wrap { width: 100%; } .offers-grid, .loading-grid { grid-template-columns: 1fr; } .source-heading { align-items: flex-start; flex-direction: column; gap: 8px; } .source-panel, .official-links { padding: 15px; } .official-links > div { grid-template-columns: 1fr; } .official-links a { align-items: flex-start; flex-direction: column; gap: 4px; } }

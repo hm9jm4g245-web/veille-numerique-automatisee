@@ -5,33 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#111827">
   <title>Veille Black Friday — Darty & Électro Dépôt</title>
-  <meta name="description" content="Les offres Black Friday mises à jour automatiquement pour Darty et Électro Dépôt.">
+  <meta name="description" content="Les offres Black Friday de Darty et Électro Dépôt, avec des sources Dealabs et idealo.">
   <link rel="stylesheet" href="styles.css">
   <script src="offers.js" defer></script>
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="./" aria-label="Accueil">
-      <span class="brand-icon">%</span>
-      <span>BLACK<span>WATCH</span></span>
-    </a>
+    <a class="brand" href="./" aria-label="Accueil"><span class="brand-icon">%</span><span>BLACK<span>WATCH</span></span></a>
     <button class="refresh-button" id="refresh-button" type="button" aria-label="Actualiser les offres">↻ <span>Actualiser</span></button>
   </header>
 
   <main>
     <section class="hero">
-      <p class="eyebrow">VEILLE AUTOMATIQUE · OFFRES EN LIGNE</p>
-      <h1>Les meilleurs prix du <span>Black Friday</span></h1>
-      <p>Sélection automatisée des promotions de Darty et Électro Dépôt.</p>
-      <div class="update-status" aria-live="polite">
-        <span class="status-dot"></span>
-        <span id="update-status">Vérification des offres…</span>
-      </div>
+      <p class="eyebrow">VEILLE AUTOMATIQUE · PROMOTIONS EN LIGNE</p>
+      <h1>Les bons plans du <span>Black Friday</span></h1>
+      <p>Offres repérées chez Darty et Électro Dépôt, avec des sources de comparaison indépendantes.</p>
+      <div class="update-status" aria-live="polite"><span class="status-dot"></span><span id="update-status">Vérification des offres…</span></div>
     </section>
 
     <section class="notice" id="notice">
-      <strong>Mise à jour automatique</strong>
-      <span>Les boutiques sont interrogées à chaque ouverture. Si leur affichage bloque la lecture automatique, les liens officiels restent disponibles.</span>
+      <strong>Actualisation à l’ouverture</strong>
+      <span>Les pages publiques sont vérifiées à chaque visite. Les boutiques peuvent limiter la lecture automatique ; les liens sources permettent alors de consulter les offres directement.</span>
     </section>
 
     <section class="toolbar" aria-label="Filtres des offres">
@@ -40,33 +34,29 @@
         <button class="tab" type="button" data-store="darty">Darty</button>
         <button class="tab" type="button" data-store="electro">Électro Dépôt</button>
       </div>
-      <label class="search-wrap">
-        <span aria-hidden="true">⌕</span>
-        <input id="search" type="search" placeholder="Rechercher un produit" aria-label="Rechercher une offre">
-      </label>
+      <label class="search-wrap"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Rechercher un produit" aria-label="Rechercher une offre"></label>
     </section>
 
-    <section id="loading" class="loading-grid" aria-label="Chargement des offres">
-      <article></article><article></article><article></article><article></article>
-    </section>
-
+    <section id="loading" class="loading-grid" aria-label="Chargement des offres"><article></article><article></article><article></article><article></article></section>
     <section class="offers-grid" id="offers-grid" aria-live="polite"></section>
 
-    <section class="official-links" aria-label="Pages officielles">
-      <h2>Voir directement les promotions officielles</h2>
+    <section class="source-panel" aria-label="Autres sites de veille">
+      <div class="source-heading"><div><p class="eyebrow">SOURCES COMPLÉMENTAIRES</p><h2>Comparer et vérifier les bons plans</h2></div><p>Dealabs signale des promotions partagées par sa communauté. idealo aide à comparer les prix d’un produit entre marchands.</p></div>
+      <div class="source-links">
+        <a href="https://www.dealabs.com/search?q=Darty" target="_blank" rel="noopener noreferrer"><span class="source-logo dealabs-logo">D</span><span><b>Rechercher Darty sur Dealabs</b><small>Offres et retours de la communauté</small></span><i>↗</i></a>
+        <a href="https://www.dealabs.com/search?q=Electro%20D%C3%A9p%C3%B4t" target="_blank" rel="noopener noreferrer"><span class="source-logo dealabs-logo">D</span><span><b>Rechercher Électro Dépôt sur Dealabs</b><small>Offres et retours de la communauté</small></span><i>↗</i></a>
+        <a href="https://www.idealo.fr/" target="_blank" rel="noopener noreferrer"><span class="source-logo idealo-logo">i</span><span><b>Comparer les prix sur idealo</b><small>Recherchez le modèle exact avant d’acheter</small></span><i>↗</i></a>
+      </div>
+    </section>
+
+    <section class="official-links" aria-label="Pages officielles des magasins">
+      <h2>Promotions officielles des magasins</h2>
       <div>
-        <a href="https://www.darty.com/black-friday" target="_blank" rel="noopener noreferrer">
-          <span>Ouvrir Darty <b>↗</b></span>
-          <small>Page officielle Black Friday</small>
-        </a>
-        <a href="https://www.electrodepot.fr/black-friday" target="_blank" rel="noopener noreferrer">
-          <span>Ouvrir Électro Dépôt <b>↗</b></span>
-          <small>Page officielle Black Friday</small>
-        </a>
+        <a href="https://www.darty.com/black-friday" target="_blank" rel="noopener noreferrer"><span>Ouvrir Darty <b>↗</b></span><small>Page officielle Black Friday</small></a>
+        <a href="https://www.electrodepot.fr/black-friday" target="_blank" rel="noopener noreferrer"><span>Ouvrir Électro Dépôt <b>↗</b></span><small>Page officielle Black Friday</small></a>
       </div>
     </section>
   </main>
-
-  <footer>Les prix peuvent évoluer. Vérifiez toujours le prix final sur la boutique officielle avant l’achat.</footer>
+  <footer>Prix et disponibilités susceptibles de changer. Vérifiez le prix final et les conditions sur le site marchand. Aucun lien d’affiliation.</footer>
 </body>
 </html>
