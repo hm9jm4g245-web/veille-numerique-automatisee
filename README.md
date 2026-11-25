@@ -1,16 +1,18 @@
-# Neon Slots — démonstration fictive
+# Veille Black Friday — Darty & Électro Dépôt
 
-Une petite machine à sous jouable dans le navigateur, conçue uniquement comme démonstration/jeu de loisir avec des crédits virtuels.
+Page statique HTML/CSS/JavaScript remplaçant l’ancienne démonstration de casino sur la branche `feature/veille-black-friday`.
 
-## Jouer
+## Mise à jour
 
-Ouvrez `index.html` dans un navigateur. Aucun serveur ni installation n’est nécessaire.
+À chaque chargement de la page, `offers.js` tente d’interroger les pages officielles Black Friday :
 
-## Fonctionnement
+- https://www.darty.com/black-friday
+- https://www.electrodepot.fr/black-friday
 
-- Solde de départ : 1 000 crédits fictifs, mémorisé localement dans le navigateur.
-- Mises disponibles : 10, 25, 50 ou 100 crédits.
-- Trois symboles identiques sur la ligne centrale rapportent le multiplicateur indiqué dans le tableau des gains.
-- Les symboles Scatter ont une probabilité de 10 % par rouleau ; trois Scatter débloquent 5 tours bonus gratuits avec des gains doublés.
-- Les tours bonus ne coûtent rien. Le total bonus est ajouté au solde à la fin des 5 tours.
-- Réinitialisez le solde à tout moment. Aucun paiement, dépôt ou retrait réel n’est possible.
+Les offres sont stock��es en cache dans le navigateur uniquement pour les afficher si une boutique devient temporairement indisponible.
+
+## Limite technique
+
+Les boutiques peuvent afficher des données dynamiques, utiliser des protections anti-robot ou modifier leur structure HTML. Une page GitHub Pages entièrement statique ne dispose pas de serveur pour contourner durablement ces restrictions. Si une boutique bloque l’accès automatique, la page affiche les liens officiels et conserve les dernières données disponibles dans le cache navigateur.
+
+Pour une mise à jour métier encore plus fiable, le projet peut être complété par un petit processus automatisé quotidien qui récupère les données côté serveur et met à jour un fichier JSON.
