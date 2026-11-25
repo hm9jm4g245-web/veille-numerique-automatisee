@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101225">
+  <title>Neon Slots — Casino fictif</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="game.js" defer></script>
+</head>
+<body>
+  <main class="casino-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Neon Slots, accueil"><span class="brand-mark">✦</span> NEON<span>SLOTS</span></a>
+      <div class="balance-card" aria-live="polite">
+        <span class="balance-label">SOLDE FICTIF</span>
+        <strong><span id="balance">1 000</span> <small>crédits</small></strong>
+      </div>
+    </header>
+
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">SALLE DE JEUX · MODE DÉMO</p>
+      <h1 id="page-title">Faites tourner <span>la chance.</span></h1>
+      <p class="intro">Une machine à sous pour s’amuser, avec des crédits entièrement fictifs.</p>
+    </section>
+
+    <section class="machine-card" aria-label="Machine à sous Neon Slots">
+      <div class="machine-topline"><span>★ NEON JACKPOT ★</span><span class="demo-tag">DÉMO</span></div>
+      <div class="reels-frame">
+        <div class="reels" id="reels" aria-label="Résultat de la machine">
+          <div class="reel" id="reel-0" aria-label="Rouleau 1">🍒</div>
+          <div class="reel" id="reel-1" aria-label="Rouleau 2">💎</div>
+          <div class="reel" id="reel-2" aria-label="Rouleau 3">🍋</div>
+        </div>
+        <div class="payline" aria-hidden="true"></div>
+      </div>
+
+      <p class="game-message" id="message" aria-live="polite">Choisissez votre mise et lancez la partie !</p>
+
+      <div class="controls">
+        <label class="bet-control" for="bet-select">
+          <span>MISE</span>
+          <select id="bet-select" aria-label="Choisir la mise en crédits fictifs">
+            <option value="10">10 crédits</option>
+            <option value="25" selected>25 crédits</option>
+            <option value="50">50 crédits</option>
+            <option value="100">100 crédits</option>
+          </select>
+        </label>
+        <button id="spin-button" class="spin-button" type="button"><span>↻</span> TOURNER</button>
+      </div>
+      <button id="reset-button" class="reset-button" type="button">Réinitialiser le solde fictif</button>
+    </section>
+
+    <section class="info-grid" aria-label="Informations du jeu">
+      <article class="info-card">
+        <h2>Comment jouer</h2>
+        <p>Choisissez une mise, puis appuyez sur <strong>Tourner</strong>. La mise est déduite de votre solde fictif.</p>
+      </article>
+      <article class="info-card paytable">
+        <h2>Gains sur la ligne centrale</h2>
+        <p>🍒 Cerises <b>×3</b> <span>🍋 Citrons <b>×4</b></span></p>
+        <p>🔔 Cloches <b>×6</b> <span>⭐ Étoiles <b>×10</b></span></p>
+        <p>💎 Diamants <b>×20</b></p>
+      </article>
+    </section>
+
+    <footer>Jeu de démonstration uniquement · Aucun dépôt, achat ou retrait d’argent réel.</footer>
+  </main>
+</body>
+</html>
