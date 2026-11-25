@@ -21,18 +21,19 @@
     <section class="hero" aria-labelledby="page-title">
       <p class="eyebrow">SALLE DE JEUX · MODE DÉMO</p>
       <h1 id="page-title">Faites tourner <span>la chance.</span></h1>
-      <p class="intro">Une machine à sous pour s’amuser, avec des crédits entièrement fictifs.</p>
+      <p class="intro">Une machine à sous animée, avec des crédits entièrement fictifs.</p>
     </section>
 
     <section class="machine-card" aria-label="Machine à sous Neon Slots">
       <div class="machine-topline"><span>★ NEON JACKPOT ★</span><span class="demo-tag">DÉMO</span></div>
-      <div class="reels-frame">
+      <div class="reels-frame" id="reels-frame">
         <div class="reels" id="reels" aria-label="Résultat de la machine">
           <div class="reel" id="reel-0" aria-label="Rouleau 1">🍒</div>
           <div class="reel" id="reel-1" aria-label="Rouleau 2">💎</div>
           <div class="reel" id="reel-2" aria-label="Rouleau 3">🍋</div>
         </div>
         <div class="payline" aria-hidden="true"></div>
+        <div class="sparkle-layer" id="sparkle-layer" aria-hidden="true"></div>
       </div>
 
       <p class="game-message" id="message" aria-live="polite">Choisissez votre mise et lancez la partie !</p>
@@ -56,16 +57,30 @@
       <article class="info-card">
         <h2>Comment jouer</h2>
         <p>Choisissez une mise, puis appuyez sur <strong>Tourner</strong>. La mise est déduite de votre solde fictif.</p>
+        <p>Trois symboles <strong class="scatter-text">🌌 SCATTER</strong> déclenchent le jeu bonus : 5 tours gratuits avec gains doublés.</p>
       </article>
       <article class="info-card paytable">
         <h2>Gains sur la ligne centrale</h2>
         <p>🍒 Cerises <b>×3</b> <span>🍋 Citrons <b>×4</b></span></p>
         <p>🔔 Cloches <b>×6</b> <span>⭐ Étoiles <b>×10</b></span></p>
         <p>💎 Diamants <b>×20</b></p>
+        <p>🌌 3 Scatter <b>Bonus ×2</b></p>
       </article>
     </section>
 
     <footer>Jeu de démonstration uniquement · Aucun dépôt, achat ou retrait d’argent réel.</footer>
   </main>
+
+  <div class="bonus-overlay" id="bonus-overlay" hidden>
+    <section class="bonus-panel" role="dialog" aria-modal="true" aria-labelledby="bonus-title">
+      <div class="bonus-stars" aria-hidden="true">✦　✧　✦</div>
+      <p class="bonus-kicker">FONCTION SPÉCIALE DÉBLOQUÉE</p>
+      <h2 id="bonus-title">PORTAIL <span>SCATTER</span></h2>
+      <p class="bonus-copy">Trois Scatter ! Lancez 5 tours gratuits. Tous les gains sont doublés.</p>
+      <div class="bonus-meter" id="bonus-meter" aria-live="polite">5 tours gratuits</div>
+      <div class="bonus-result" id="bonus-result" aria-live="polite"></div>
+      <button class="bonus-button" id="bonus-button" type="button">JOUER LE BONUS ✨</button>
+    </section>
+  </div>
 </body>
 </html>
